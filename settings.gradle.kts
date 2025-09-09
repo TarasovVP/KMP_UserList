@@ -17,3 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "KMP_UserList"
 include(":androidApp")
 include(":shared")
+include(":desktopApp")
+include(":webApp")

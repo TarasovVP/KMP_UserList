@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Users List</h1>
+        <button class="refresh-btn" onclick="loadUsers()">Refresh Users</button>
+    </header>
+
+    <div id="loading" class="loading">Loading users...</div>
+    <div id="error" class="error" style="display: none;"></div>
+
+    <div id="users-container" class="users-container">
+
+    </div>
+</div>
+
+<script src="webApp.js"></script>
+</body>
+</html>

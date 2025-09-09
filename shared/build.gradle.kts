@@ -23,12 +23,23 @@ kotlin {
         }
     }
 
+    // Desktop
+    jvm()
+
+    js(IR) {
+        browser {
+            commonWebpackConfig {
+                cssSupport {
+                    enabled.set(true)
+                }
+            }
+        }
+        binaries.executable()
+    }
+
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }
