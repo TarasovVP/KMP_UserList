@@ -26,7 +26,6 @@ struct ContentView: View {
             }
             .task { vm.refresh() }
         }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
