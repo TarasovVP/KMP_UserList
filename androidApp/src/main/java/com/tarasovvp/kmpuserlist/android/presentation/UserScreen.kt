@@ -1,13 +1,26 @@
 package com.tarasovvp.kmpuserlist.android.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,15 +36,12 @@ import coil3.request.crossfade
 import com.tarasovvp.kmpuserlist.User
 
 @OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
 fun UsersScreen(
     users: List<User>,
     isRefreshing: Boolean,
     modifier: Modifier = Modifier,
-    onRefresh: () -> Unit,
-    onEmailClick: (String) -> Unit = {},
-    onPhoneClick: (String) -> Unit = {}
+    onRefresh: () -> Unit
 ) {
     PullToRefreshBox(
         isRefreshing = isRefreshing,
@@ -45,7 +55,7 @@ fun UsersScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(users, key = { it.email }) { user ->
-                UserCard(user, onEmailClick = onEmailClick, onPhoneClick = onPhoneClick)
+                UserCard(user)
             }
         }
     }
@@ -54,9 +64,7 @@ fun UsersScreen(
 @Composable
 private fun UserCard(
     user: User,
-    modifier: Modifier = Modifier,
-    onEmailClick: (String) -> Unit,
-    onPhoneClick: (String) -> Unit
+    modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -89,13 +97,11 @@ private fun UserCard(
 
                 ContactDetail(
                     label = "Email:",
-                    value = user.email,
-                    onClick = { onEmailClick(user.email) }
+                    value = user.email
                 )
                 ContactDetail(
                     label = "Phone:",
-                    value = user.phone,
-                    onClick = { onPhoneClick(user.phone) }
+                    value = user.phone
                 )
             }
         }
@@ -127,10 +133,9 @@ private fun Detail(label: String, value: String) {
 }
 
 @Composable
-private fun ContactDetail(label: String, value: String, onClick: () -> Unit) {
+private fun ContactDetail(label: String, value: String) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable(onClick = onClick)
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = label, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.width(8.dp))
