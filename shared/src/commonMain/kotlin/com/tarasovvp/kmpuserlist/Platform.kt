@@ -1,4 +1,4 @@
-package com.tarasovvp.kmp_userlist
+package com.tarasovvp.kmpuserlist
 
 interface Platform {
     val name: String

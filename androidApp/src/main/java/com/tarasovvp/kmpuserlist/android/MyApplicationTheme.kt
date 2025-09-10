@@ -1,4 +1,4 @@
-package com.tarasovvp.kmp_userlist.android
+package com.tarasovvp.kmpuserlist.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

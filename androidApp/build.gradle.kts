@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tarasovvp.kmp_userlist.android"
+    namespace = "com.tarasovvp.kmpuserlist.android"
     compileSdk = 34
     defaultConfig {
         applicationId = "com.tarasovvp.kmp_userlist.android"

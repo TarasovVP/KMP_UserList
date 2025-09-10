@@ -1,4 +1,4 @@
-package com.tarasovvp.kmp_userlist
+package com.tarasovvp.kmpuserlist
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"

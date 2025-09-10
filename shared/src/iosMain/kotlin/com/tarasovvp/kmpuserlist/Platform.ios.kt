@@ -1,4 +1,4 @@
-package com.tarasovvp.kmp_userlist
+package com.tarasovvp.kmpuserlist
 
 import platform.UIKit.UIDevice
 

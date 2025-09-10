@@ -1,4 +1,4 @@
-package com.tarasovvp.kmp_userlist
+package com.tarasovvp.kmpuserlist
 
 class Greeting {
     private val platform: Platform = getPlatform()

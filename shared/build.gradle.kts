@@ -1,17 +1,23 @@
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
+    // Android
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
+        tasks.withType<KotlinJvmCompile>().configureEach {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_21)
             }
         }
     }
-    
+    // iOS
     listOf(
         iosX64(),
         iosArm64(),
@@ -22,10 +28,9 @@ kotlin {
             isStatic = true
         }
     }
-
     // Desktop
     jvm()
-
+    // Web
     js(IR) {
         browser {
             commonWebpackConfig {
@@ -39,13 +44,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
             //put your multiplatform dependencies here
         }
     }
 }
 
 android {
-    namespace = "com.tarasovvp.kmp_userlist"
+    namespace = "com.tarasovvp.kmpuserlist"
     compileSdk = 34
     defaultConfig {
         minSdk = 28
