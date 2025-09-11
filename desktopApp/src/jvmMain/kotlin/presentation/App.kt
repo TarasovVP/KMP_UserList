@@ -1,3 +1,5 @@
+package presentation
+
 import com.tarasovvp.kmpuserlist.GetUserListUseCase
 import com.tarasovvp.kmpuserlist.User
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +31,11 @@ class App {
     }
     private val status = JLabel("")
 
-    fun show() {
+    init {
+        initialize()
+    }
+
+    fun initialize() {
         val refresh = JButton("Refresh").apply { addActionListener { refresh() } }
 
         val top = JPanel(BorderLayout()).apply {

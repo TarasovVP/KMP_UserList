@@ -1,5 +1,5 @@
 import presentation.App
 
 fun main() {
-    App().initialize()
+    App()
 }

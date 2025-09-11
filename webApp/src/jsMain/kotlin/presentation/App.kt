@@ -13,7 +13,7 @@ class App(
     private val getUserListUseCase: GetUserListUseCase = GetUserListUseCase()
 ) {
 
-    fun initialize() {
+    init {
         setupEventListeners()
         loadUsers()
     }
