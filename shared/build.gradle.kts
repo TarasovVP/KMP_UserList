@@ -29,7 +29,13 @@ kotlin {
         }
     }
     // Desktop
-    jvm()
+    jvm {
+        tasks.withType<KotlinJvmCompile>().configureEach {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_21)
+            }
+        }
+    }
     // Web
     js(IR) {
         browser {
