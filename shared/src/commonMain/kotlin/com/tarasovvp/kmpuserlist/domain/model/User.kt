@@ -1,4 +1,4 @@
-package com.tarasovvp.kmpuserlist
+package com.tarasovvp.kmpuserlist.domain.model
 
 data class User(
     val firstName: String,

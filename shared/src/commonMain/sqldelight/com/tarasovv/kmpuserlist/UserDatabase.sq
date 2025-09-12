@@ -1,0 +1,21 @@
+CREATE TABLE userEntity(
+  email TEXT NOT NULL PRIMARY KEY,
+  firstName TEXT NOT NULL,
+  lastName TEXT NOT NULL,
+  maidenName TEXT NOT NULL,
+  age INTEGER NOT NULL,
+  gender TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  birthDate TEXT NOT NULL,
+  image TEXT NOT NULL
+);
+
+selectAll:
+SELECT email, firstName, lastName, maidenName, age, gender, phone, birthDate, image FROM userEntity;
+
+insertUser:
+INSERT INTO userEntity(email, firstName, lastName, maidenName, age, gender, phone, birthDate, image)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAll:
+DELETE FROM userEntity;

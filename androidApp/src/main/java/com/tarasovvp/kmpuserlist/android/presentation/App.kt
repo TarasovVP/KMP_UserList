@@ -16,30 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.tarasovvp.kmpuserlist.GetUserListUseCase
-
-private fun provideGetUserListUseCase(): GetUserListUseCase = GetUserListUseCase()
-
 
 @Composable
 fun App() {
-    val viewModel: UsersViewModel = viewModel(
-        factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return UsersViewModel(provideGetUserListUseCase()) as T
-            }
-        }
-    )
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-
+        val viewModel: UsersViewModel = viewModel(UsersViewModel::class)
         val state by viewModel.uiState.collectAsStateWithLifecycle()
         Scaffold(
             topBar = {
@@ -63,7 +49,7 @@ fun App() {
                 state.error != null -> {
                     ErrorView(
                         message = state.error.orEmpty(),
-                        onRetry = { viewModel.refresh() }
+                        onRetry = { viewModel.initialize() }
                     )
                 }
 
@@ -74,7 +60,7 @@ fun App() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding),
-                        { viewModel.refresh() }
+                        { viewModel.initialize() }
                     )
                 }
             }

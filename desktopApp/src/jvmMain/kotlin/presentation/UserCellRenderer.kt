@@ -1,6 +1,6 @@
 package presentation
 
-import com.tarasovvp.kmpuserlist.User
+import com.tarasovvp.kmpuserlist.domain.model.User
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component

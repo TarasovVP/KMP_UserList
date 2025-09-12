@@ -1,6 +1,6 @@
 package presentation
 
-import com.tarasovvp.kmpuserlist.GetUserListUseCase
+import com.tarasovvp.kmpuserlist.di.getUserListUseCase
 import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -9,8 +9,7 @@ import utils.Constants
 
 class App(
     private val userRenderer: UserRenderer = UserRenderer(),
-    private val uiStateManager: UiStateManager = UiStateManager(),
-    private val getUserListUseCase: GetUserListUseCase = GetUserListUseCase()
+    private val uiStateManager: UiStateManager = UiStateManager()
 ) {
 
     init {
@@ -30,7 +29,8 @@ class App(
         val scope = MainScope()
         scope.launch {
             try {
-                val users = getUserListUseCase.execute()
+                val userListUseCase = getUserListUseCase()
+                val users = userListUseCase.execute()
                 userRenderer.renderUsers(users)
             } catch (e: Exception) {
                 uiStateManager.showError("${Constants.ERROR_LOADING_USERS}${e.message ?: Constants.ERROR_UNKNOWN}")

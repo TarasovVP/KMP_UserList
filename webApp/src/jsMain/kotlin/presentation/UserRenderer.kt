@@ -1,6 +1,6 @@
 package presentation
 
-import com.tarasovvp.kmpuserlist.User
+import com.tarasovvp.kmpuserlist.domain.model.User
 import kotlinx.browser.document
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLImageElement

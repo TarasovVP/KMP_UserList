@@ -1,7 +1,8 @@
 package presentation
 
-import com.tarasovvp.kmpuserlist.GetUserListUseCase
-import com.tarasovvp.kmpuserlist.User
+import com.tarasovvp.kmpuserlist.di.getUserListUseCase
+import com.tarasovvp.kmpuserlist.domain.usecase.GetUserListUseCase
+import com.tarasovvp.kmpuserlist.domain.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -21,7 +22,6 @@ import javax.swing.border.EmptyBorder
 
 class App {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Swing)
-    private val useCase by lazy { GetUserListUseCase() }
 
     private val frame = JFrame("Users")
     private val listModel = DefaultListModel<User>()
@@ -62,7 +62,10 @@ class App {
         status.foreground = Color.GRAY
         status.text = "Loading…"
         scope.launch {
-            val result = withContext(Dispatchers.IO) { runCatching { useCase.execute() } }
+            val result = withContext(Dispatchers.IO) { runCatching {
+                val useCase = getUserListUseCase()
+                useCase.execute()
+            } }
             result.onSuccess { users ->
                 listModel.clear()
                 users.forEach { listModel.addElement(it) }
