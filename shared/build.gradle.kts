@@ -25,6 +25,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
+            linkerOpts.add("-lsqlite3")
             baseName = "shared"
             isStatic = true
         }
@@ -67,8 +68,6 @@ kotlin {
             implementation(libs.ktor.client.android)
             // SQLDelight
             implementation(libs.sqldelight.android.driver)
-            // Koin
-            implementation(libs.koin.android)
         }
         iosMain.dependencies {
             // Ktor

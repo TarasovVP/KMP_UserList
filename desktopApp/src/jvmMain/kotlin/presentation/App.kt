@@ -62,8 +62,8 @@ class App {
         status.foreground = Color.GRAY
         status.text = "Loading…"
         scope.launch {
+            val useCase = getUserListUseCase()
             val result = withContext(Dispatchers.IO) { runCatching {
-                val useCase = getUserListUseCase()
                 useCase.execute()
             } }
             result.onSuccess { users ->

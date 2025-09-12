@@ -12,9 +12,9 @@ final class UsersViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
 
-    private let useCase: GetUserListUseCase
+    private var useCase: GetUserListUseCase?
 
-    init(useCase: GetUserListUseCase = GetUserListUseCase()) {
+    init(useCase: GetUserListUseCase? = nil) {
         self.useCase = useCase
     }
 
@@ -22,22 +22,39 @@ final class UsersViewModel: ObservableObject {
         isLoading = true
         error = nil
 
-      
-        useCase.execute { result, err in
-            Task { @MainActor in
-                self.isLoading = false
-                if let err {
-                    self.error = err.localizedDescription
+        func run(with uc: GetUserListUseCase) {
+            uc.execute { result, err in
+                Task { @MainActor in
+                    self.isLoading = false
+                    if let err = err {
+                        self.error = err.localizedDescription
+                        self.users = []
+                        return
+                    }
+                    if let arr = result {
+                        self.users = arr
+                        return
+                    }
                     self.users = []
-                    return
                 }
+            }
+        }
 
-                if let swiftArray = result {
-                    self.users = swiftArray
-                    return
+        if let uc = useCase {
+            run(with: uc)
+            return
+        }
+
+        BridgeKt.getUserListUseCase { resolved, bridgeErr in
+            if let resolved = resolved {
+                self.useCase = resolved
+                run(with: resolved)
+            } else {
+                Task { @MainActor in
+                    self.isLoading = false
+                    self.error = bridgeErr?.localizedDescription ?? "Unknown error"
+                    self.users = []
                 }
-
-                self.users = []
             }
         }
     }

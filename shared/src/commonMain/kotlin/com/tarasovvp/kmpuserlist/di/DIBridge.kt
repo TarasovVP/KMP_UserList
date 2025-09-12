@@ -10,6 +10,10 @@ object DIBridge {
     private var app: KoinApplication? = null
     private var provider: (suspend () -> Module)? = null
 
+    fun configure(block: suspend () -> Module) {
+        provider = block
+    }
+
     @PublishedApi
     internal suspend fun ensure(): Koin {
         val a = app

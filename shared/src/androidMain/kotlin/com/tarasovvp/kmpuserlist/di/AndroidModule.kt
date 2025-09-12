@@ -1,12 +1,12 @@
 package com.tarasovvp.kmpuserlist.di
 
+import android.content.Context
 import com.tarasovvp.kmpuserlist.data.database.DatabaseDriverFactory
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val androidModule =
+fun androidModule(context: Context) =
     module {
         single {
-            DatabaseDriverFactory(androidContext())
+            DatabaseDriverFactory(context)
         }
     }

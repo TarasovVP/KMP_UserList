@@ -1,5 +1,10 @@
 package com.tarasovvp.kmpuserlist.di
 
+import android.content.Context
 import org.koin.core.module.Module
 
-actual suspend fun defaultPlatformModule(): Module = androidModule
+fun configureAndroid(context: Context) {
+    DIBridge.configure { androidModule(context) }
+}
+
+actual suspend fun defaultPlatformModule(): Module = error("Call configureAndroid(context) before first resolve()")
