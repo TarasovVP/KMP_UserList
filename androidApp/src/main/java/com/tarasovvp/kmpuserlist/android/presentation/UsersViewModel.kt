@@ -22,8 +22,7 @@ class UsersViewModel() : ViewModel() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
             runCatching {
-                val getUserListUseCase = getUserListUseCase()
-                getUserListUseCase.execute()
+                getUserListUseCase().execute()
             }.onSuccess { list ->
                 _uiState.update { it.copy(isLoading = false, users = list) }
             }.onFailure { e ->

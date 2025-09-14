@@ -68,6 +68,8 @@ kotlin {
             implementation(libs.ktor.client.android)
             // SQLDelight
             implementation(libs.sqldelight.android.driver)
+            // Koin
+            implementation(libs.koin.android)
         }
         iosMain.dependencies {
             // Ktor

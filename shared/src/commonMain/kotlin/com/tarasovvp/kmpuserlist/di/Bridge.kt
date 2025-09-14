@@ -1,9 +1,8 @@
 package com.tarasovvp.kmpuserlist.di
 
 import com.tarasovvp.kmpuserlist.domain.usecase.GetUserListUseCase
+import org.koin.core.Koin
 
-object Bridge {
-    suspend inline fun <reified T : Any> resolve(): T = DIBridge.get()
-}
+fun getKoin(): Koin = getAppKoin()
 
-suspend fun getUserListUseCase(): GetUserListUseCase = Bridge.resolve()
+suspend fun getUserListUseCase(): GetUserListUseCase = getKoin().get()
