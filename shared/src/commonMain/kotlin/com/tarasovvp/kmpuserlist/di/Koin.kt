@@ -20,7 +20,7 @@ fun initKoin(config: (KoinApplication) -> Unit = {}) {
     }
 }
 
-fun getAppKoin(): Koin =
+fun getKoin(): Koin =
     koinRef ?: throw Throwable("Koin is not initialized. Call initKoin() first.")
 
 expect fun platformModule(): Module
