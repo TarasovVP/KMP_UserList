@@ -27,3 +27,15 @@ fun UserEntity.toDomain() = User(
     birthDate = birthDate,
     image = image
 )
+
+fun User.toEntity() = UserEntity(
+    email = email,
+    firstName = firstName,
+    lastName = lastName,
+    maidenName = maidenName,
+    age = age.toLong(),
+    gender = gender,
+    phone = phone,
+    birthDate = birthDate,
+    image = image
+)
