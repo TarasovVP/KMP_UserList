@@ -2,6 +2,7 @@ package com.tarasovvp.kmpuserlist.data.database.datasource
 
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import com.tarasovvp.kmpuserlist.data.database.SharedDatabase
+import com.tarasovvp.kmpuserlist.data.mapper.toDomain
 import com.tarasovvp.kmpuserlist.domain.model.User
 
 class LocalUserDataSourceImpl(private val db: SharedDatabase) : LocalUserDataSource {
@@ -10,17 +11,7 @@ class LocalUserDataSourceImpl(private val db: SharedDatabase) : LocalUserDataSou
             .selectAll()
             .awaitAsList()
             .map {
-                User(
-                    firstName = it.firstName,
-                    lastName = it.lastName,
-                    maidenName = it.maidenName,
-                    age = it.age.toInt(),
-                    gender = it.gender,
-                    email = it.email,
-                    phone = it.phone,
-                    birthDate = it.birthDate,
-                    image = it.image
-                )
+                it.toDomain()
             }
     }
 
