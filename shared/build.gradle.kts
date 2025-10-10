@@ -112,6 +112,7 @@ sqldelight {
         create("UserDatabase") {
             packageName.set("com.tarasovvp.kmpuserlist.db")
             generateAsync.set(true)
+            version = "1.0"
         }
     }
 }
