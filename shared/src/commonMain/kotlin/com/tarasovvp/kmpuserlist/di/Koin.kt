@@ -7,20 +7,18 @@ import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 
+private var customConfig: (KoinApplication.() -> Unit)? = null
 
-private var koinRef: Koin? = null
-
-fun initKoin(config: (KoinApplication) -> Unit = {}) {
-    if (koinRef == null) {
-        val app = startKoin {
-            config(this)
-            modules(commonModule, platformModule())
-        }
-        koinRef = app.koin
-    }
+fun initKoin(config: (KoinApplication.() -> Unit) = {}) {
+    customConfig = config
+}
+private val koinInstance by lazy {
+    startKoin {
+        customConfig?.invoke(this)
+        modules(commonModule, platformModule())
+    }.koin
 }
 
-fun getKoin(): Koin =
-    koinRef ?: throw Throwable("Koin is not initialized. Call initKoin() first.")
+fun getKoin(): Koin = koinInstance
 
 expect fun platformModule(): Module

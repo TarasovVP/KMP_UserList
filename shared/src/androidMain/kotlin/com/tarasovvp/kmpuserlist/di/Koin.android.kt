@@ -7,9 +7,7 @@ import org.koin.core.module.Module
 actual fun platformModule(): Module = androidModule
 
 fun initKoin(application: Application) {
-    initKoin { koinApplication ->
-        koinApplication.apply {
-            androidContext(application)
-        }
+    initKoin {
+        androidContext(application)
     }
 }
